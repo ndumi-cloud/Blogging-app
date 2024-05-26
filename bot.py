@@ -69,6 +69,8 @@ if prompt := st.chat_input(placeholder="how may I help you?"):
 with st.sidebar:
     st.write()
     # Add a button to navigate to the Blogging social app
-    if st.button("Go to Blog App"):
-       st.markdown(f"[Go to Blog App]({https://politegreencow.github.io/group11/})")
+if st.button("Go to Blog App"):
+    st.markdown("[Go to Blog App](https://group-blog-app2.netlify.app)")
+
+
        
