@@ -1,34 +1,17 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import '../header.css'
 
-function Header({ isAuthenticated, user }) {
+export default function Header() {
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          {isAuthenticated ? (
-            <li>
-              <Link to="/create-post">New Post</Link>
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-    </header>
-  );
+    <>
+    <div className='headerTitles'>
+          <span className='headerTitleSm'>React & Node</span>
+          <span className='headerTitleLg'>Blog</span>
+      </div>
+      <img className='headerImg'
+          src="https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+          alt='' />
+    </>
+  )
 }
-
-export default Header;

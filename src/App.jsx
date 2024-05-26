@@ -1,48 +1,32 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import Home from './components/Home';
-import CreatePost from './components/CreatePost';
-import PostDetails from './components/PostDetails';
-import './App.css'
+import TopBar from './components/TopBar';
+import Homepage from './pages/home/home';
+import Single from './pages/home/Single/Single';
+import Write from './pages/Write/Write';
+import Settings from './pages/Settings/Settings';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'Predefined Article 1', content: 'Content of predefined article 1', author: 'Admin', likes: 0, comments: [] },
-    { id: 2, title: 'Predefined Article 2', content: 'Content of predefined article 2', author: 'Admin', likes: 0, comments: [] },
-  ]);
-
-  const handleLogin = (userData) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-  };
-
-  const handleSignUp = (userData) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-  };
-
-  const handleCreatePost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
+  // Simulate current user state
+  const [currentUser, setCurrentUser] = useState(true); // Set to true for now, simulate logged-in user
 
   return (
     <Router>
-      <Header isAuthenticated={isAuthenticated} user={user} />
+      <TopBar />
       <Routes>
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/signup" element={<SignUp onSignUp={handleSignUp} />} />
-        <Route path="/create-post" element={isAuthenticated ? <CreatePost onCreatePost={handleCreatePost} user={user} /> : <div>Please log in to create a new post.</div>} />
-        <Route path="/post/:id" element={<PostDetails posts={posts} user={user} />} />
-        <Route path="/" element={<Home posts={posts} isAuthenticated={isAuthenticated} />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/posts" element={<Homepage />} />
+        <Route path="/register" element={currentUser ? <Homepage /> : <Register />} />
+        <Route path="/login" element={currentUser ? <Homepage /> : <Login />} />
+        <Route path="/post/:id" element={<Single />} />
+        <Route path="/write" element={currentUser ? <Write /> : <Login />} />
+        <Route path="/settings" element={currentUser ? <Settings /> : <Login />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }
